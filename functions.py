@@ -22,12 +22,13 @@ def maximize_arya_score_exp(nums, first, last):
         - Mario always tries to minimize Arya's future score.
     """
 
+    # Compute the length of nums
     # Base case: If the range is invalid (first > last), return 0
     if first > last:
         return 0
 
     # Base case: If there is only one number in the array, Arya must pick it
-    if len(nums) == 1:
+    if first == last:
         return nums[0]
 
     # Return the maximum score Arya can obtain between choosing the first or last element
