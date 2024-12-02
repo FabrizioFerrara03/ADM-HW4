@@ -1,3 +1,5 @@
+# ------------------------------------------------------------------- ALGORITHMIC QUESTION -------------------------------------------------------------------
+
 def maximize_arya_score_exp(nums, first, last):
 
     """
@@ -46,11 +48,10 @@ def maximize_arya_score_exp(nums, first, last):
                maximize_arya_score_exp(nums, first, last - 2)  # Arya can choose up to last-2 because Mario has chosen the last element available
                ))
 
-
-def is_arya_winner(nums):
+def is_arya_winner_exp(nums):
 
     """
-    Determine whether Arya wins in a two-player game where both players play optimally.
+    Determine whether Arya wins in a two-player game where both players play optimally, using a recursive exponential-time algorithm
 
     Args:
         nums (list[int]): A list of integers representing the sequence of numbers Arya and Mario can choose from.
@@ -70,6 +71,87 @@ def is_arya_winner(nums):
     
     # Calculate Arya's optimal score
     arya_score = maximize_arya_score_exp(nums, 0, len(nums) - 1)
+    # Calculate Mario's score
+    mario_score = sum(nums) - arya_score
+    # Return True if Arya wins, i.e., her score is greater or equal to Mario's score
+    return arya_score >= mario_score
+
+def maximize_arya_score_pol(nums):
+
+    """
+    Compute the maximum score Arya can achieve using an iterative approach with memoization.
+
+    Args:
+        nums (list[int]): A list of integers representing the sequence.
+        first (int): The starting index of the range Arya can choose from.
+        last (int): The ending index of the range Arya can choose from.
+
+    Returns:
+        int: The maximum score Arya can achieve, assuming both players play optimally.
+
+    Description:
+        This function implements an iterative algorithm with memoization to determine the maximum score Arya
+        can achieve. At each step, Arya can choose either the first or the last number in the range. Mario
+        then plays optimally to minimize Arya's future score. The function builds a table (dp) where each
+        entry dp[first][last] represents the maximum score Arya can achieve for the range [first, last].
+        
+        The algorithm assumes that:
+        - Arya always tries to maximize her score.
+        - Mario always tries to minimize Arya's future score.
+    """
+    n = len(nums)
+
+    # Create a memoization table initialized to 0
+    # dp[first][last] will store the maximum score Arya can achieve for the range [first, last]
+    dp = [[0] * n for _ in range(n)]
+
+    # Base case: When the range has only one element, Arya must pick it
+    for i in range(n):
+        dp[i][i] = nums[i]
+
+    # Fill the table iteratively for ranges of increasing size
+    for length in range(2, n + 1):  # Iterate over all possible lengths of ranges
+        for first in range(n - length + 1):  # Starting index of the range
+            last = first + length - 1  # Ending index of the range
+
+            # If Arya chooses the first element of the range
+            choose_first = nums[first] + min(
+                dp[first + 2][last] if first + 2 <= last else 0,  # Mario chooses first+1
+                dp[first + 1][last - 1] if first + 1 <= last - 1 else 0  # Mario chooses last
+            )
+
+            # If Arya chooses the last element of the range
+            choose_last = nums[last] + min(
+                dp[first + 1][last - 1] if first + 1 <= last - 1 else 0,  # Mario chooses first
+                dp[first][last - 2] if first <= last - 2 else 0  # Mario chooses last-1
+            )
+
+            # Arya selects the maximum score she can achieve between the two options
+            dp[first][last] = max(choose_first, choose_last)
+
+    # The result for the full range is stored in dp[0][n-1]
+    return dp[0][n - 1]
+
+def is_arya_winner_pol(nums):
+
+    """
+    Determine whether Arya wins the game using an iterative polynomial-time algorithm with memoization.
+
+    Args:
+        nums (list[int]): A list of integers representing the sequence of numbers Arya and Mario can choose from.
+
+    Returns:
+        bool: True if Arya's score is greater than or equal to Mario's score, False otherwise.
+
+    Description:
+        This function calculates Arya's optimal score by calling the `maximize_arya_score_pol` function, 
+        which uses an iterative approach with memoization to compute the maximum score Arya can achieve.
+        Mario's score is calculated as the difference between the total sum of the array and Arya's score.
+        The function returns True if Arya's score is greater than or equal to Mario's score, otherwise False.
+    """
+
+    # Calculate Arya's optimal score
+    arya_score = maximize_arya_score_pol(nums)
     # Calculate Mario's score
     mario_score = sum(nums) - arya_score
     # Return True if Arya wins, i.e., her score is greater or equal to Mario's score
