@@ -17,7 +17,7 @@ def maximize_arya_score_exp(nums, first, last):
         This function implements a recursive algorithm to determine the optimal score Arya can achieve. At each step,
         Arya can choose either the first or the last number in the given range. After Arya's choice, Mario plays 
         optimally to minimize Arya's future score. The function computes the maximum possible score Arya can achieve 
-        by evaluating both choices and taking the best outcome. 
+        by evaluating both choices and taking the best outcome. a
 
         The algorithm assumes that:
         - Arya always tries to maximize her score.
@@ -102,12 +102,12 @@ def maximize_arya_score_pol(nums):
     n = len(nums)
 
     # Create a memoization table initialized to 0
-    # dp[first][last] will store the maximum score Arya can achieve for the range [first, last]
-    dp = [[0] * n for _ in range(n)]
+    # scores[first][last] will store the maximum score Arya can achieve for the range [first, last]
+    scores = [[0] * n for _ in range(n)]
 
     # Base case: When the range has only one element, Arya must pick it
     for i in range(n):
-        dp[i][i] = nums[i]
+        scores[i][i] = nums[i]
 
     # Fill the table iteratively for ranges of increasing size
     for length in range(2, n + 1):  # Iterate over all possible lengths of ranges
@@ -116,21 +116,21 @@ def maximize_arya_score_pol(nums):
 
             # If Arya chooses the first element of the range
             choose_first = nums[first] + min(
-                dp[first + 2][last] if first + 2 <= last else 0,  # Mario chooses first+1
-                dp[first + 1][last - 1] if first + 1 <= last - 1 else 0  # Mario chooses last
+                scores[first + 2][last] if first + 2 <= last else 0,  # Mario chooses first+1
+                scores[first + 1][last - 1] if first + 1 <= last - 1 else 0  # Mario chooses last
             )
 
             # If Arya chooses the last element of the range
             choose_last = nums[last] + min(
-                dp[first + 1][last - 1] if first + 1 <= last - 1 else 0,  # Mario chooses first
-                dp[first][last - 2] if first <= last - 2 else 0  # Mario chooses last-1
+                scores[first + 1][last - 1] if first + 1 <= last - 1 else 0,  # Mario chooses first
+                scores[first][last - 2] if first <= last - 2 else 0  # Mario chooses last-1
             )
 
             # Arya selects the maximum score she can achieve between the two options
-            dp[first][last] = max(choose_first, choose_last)
+            scores[first][last] = max(choose_first, choose_last)
 
     # The result for the full range is stored in dp[0][n-1]
-    return dp[0][n - 1]
+    return scores[0][n - 1]
 
 def is_arya_winner_pol(nums):
 
