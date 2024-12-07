@@ -156,3 +156,50 @@ def is_arya_winner_pol(nums):
     mario_score = sum(nums) - arya_score
     # Return True if Arya wins, i.e., her score is greater or equal to Mario's score
     return arya_score >= mario_score
+
+def predictWinnerChatGPT(nums):
+    """
+    Determine whether Arya can guarantee a win, assuming both Arya and Mario play optimally.
+
+    Args:
+        nums (list[int]): A list of integers representing the sequence of numbers Arya and Mario can choose from.
+
+    Returns:
+        bool: True if Arya can guarantee a win, False otherwise.
+
+    Description:
+        This function implements an iterative dynamic programming algorithm to determine whether Arya
+        can guarantee a win. It uses a 2D table (dp) to store the maximum score difference Arya can achieve
+        over any subarray [i, j] of the input sequence. The value at dp[i][j] represents the maximum score 
+        difference Arya can ensure, considering both players play optimally.
+
+        The algorithm assumes:
+        - Arya always tries to maximize her score difference.
+        - Mario always tries to minimize Arya's score difference.
+
+        The final value at dp[0][n-1] represents the maximum score difference Arya can guarantee for the entire array.
+        If this value is non-negative, Arya can ensure her score is at least equal to Mario's, and the function returns True.
+    """
+    n = len(nums)
+
+    # Initialize DP table
+    # dp[i][j] will store the maximum score difference Arya can guarantee over the range [i, j]
+    dp = [[0] * n for _ in range(n)]
+
+    # Base case: When the range has only one element, Arya must pick it
+    for i in range(n):
+        dp[i][i] = nums[i]
+
+    # Fill the DP table for ranges of increasing size
+    for length in range(2, n + 1):  # Iterate over all possible lengths of subarrays
+        for i in range(n - length + 1):  # Starting index of the range
+            j = i + length - 1  # Ending index of the range
+
+            # Arya chooses either the first or the last element, and Mario plays optimally
+            dp[i][j] = max(
+                nums[i] - dp[i + 1][j],  # Arya picks nums[i], Mario minimizes dp[i+1][j]
+                nums[j] - dp[i][j - 1]   # Arya picks nums[j], Mario minimizes dp[i][j-1]
+            )
+
+    # Arya wins if the score difference she can guarantee is non-negative
+    return dp[0][n - 1] >= 0
