@@ -35,6 +35,9 @@ Clustering was performed using two algorithms: K-Means and K-Means++. Both were 
 
 The clustering results were evaluated using three metrics: the Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index. These metrics provided insights into the quality of the clusters, including how well-separated and compact they were. A comparison of the clustering algorithms was conducted based on these metrics to determine the most effective approach for the dataset.
 
+## 3. Bonus Question
+
+Given the two components resulting from the PCA, a Varimax rotation was performed first to facilitate interpretation. Subsequently, a k-means with 3 clusters was applied and at each iteration the subdivision of the points was saved. Finally, the variation of the group memberships was shown through a summary Gif.
 
 
 
