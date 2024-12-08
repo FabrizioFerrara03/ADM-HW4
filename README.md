@@ -1,5 +1,10 @@
 # ADM-HW4
 
+Ferrara Fabrizio 2207087
+Matteo Sorrentini 2023085
+Marta Lombardi 2156537
+Asia Montico 1966494
+
 **1.1 Data Preparation**
 
 The files rating.csv and movie.csv were loaded. rating.csv contains users’ movie ratings, while movie.csv includes movie titles and genres. A quick analysis was performed to understand the data structure and ensure there were no missing or duplicate values.
