@@ -42,7 +42,7 @@ Given the two components resulting from the PCA, a Varimax rotation was performe
 ## Algorithmic Question
 
 ### a) Optimal Strategy for Arya
-The optimal strategy for Arya was determined using a recursive dynamic programming algorithm. This algorithm explores all possible game states and decisions, ensuring both Arya and Mario play optimally. While correct, this approach has exponential time complexity \( O(4^{n/2}) \), where \( n \) is the length of the input array `nums`. An analysis of correctness for this approach is provided.
+The optimal strategy for Arya was determined using a recursive dynamic programming algorithm. This algorithm explores all possible game states and decisions, ensuring both Arya and Mario play optimally. While correct, this approach has exponential time complexity $O(4^{n/2})$, where \( n \) is the length of the input array `nums`. An analysis of correctness for this approach is provided.
 
 ### b) Python Implementation
 The recursive algorithm is implemented in the Python module `functions.py` and has been tested with multiple sequences of varying lengths to verify its correctness.
