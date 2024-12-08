@@ -59,18 +59,23 @@ Given the two components resulting from the PCA, a Varimax rotation was performe
 ### Algorithmic Question
 
 **a) Optimal Strategy for Arya**
+
 The optimal strategy for Arya was determined using a recursive dynamic programming algorithm. This algorithm explores all possible game states and decisions, ensuring both Arya and Mario play optimally. While correct, this approach has exponential time complexity $O(4^{n/2})$, where $n$ is the length of the input array *nums*. An analysis of correctness for this approach is provided.
 
 **b) Python Implementation**
+
 The recursive algorithm is implemented in the Python module `functions.py` and has been tested with multiple sequences of varying lengths to verify its correctness.
 
 **c) Time Complexity Analysis**
+
 The time complexity of the recursive algorithm was analyzed using the iterative method to solve the recurrence relation, confirming a complexity of $O(4^{n/2})$. While correct, this approach is inefficient for larger inputs.
 
 **d) Polynomial Solution**
+
 To address the inefficiency, a polynomial-time solution with $O(n^2)$ complexity was developed using an iterative dynamic programming algorithm. This approach leverages memoization to avoid redundant computations while maintaining the correctness guarantees of the exponential algorithm. An analysis of correctness and time complexity for this approach is also provided.
 
 **e) Comparison and Testing**
+
 The iterative algorithm is implemented in Python within the `functions` module. It has been tested with the same inputs as the exponential algorithm, yielding identical results. Additionally, running times were calculated for both algorithms across sequences of varying lengths, demonstrating the efficiency of the polynomial solution for larger inputs.
 
 **f) Efficient Algorithm from ChatGPT**
