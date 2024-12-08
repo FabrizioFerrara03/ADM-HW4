@@ -79,4 +79,5 @@ To address the inefficiency, a polynomial-time solution with $O(n^2)$ complexity
 The iterative algorithm is implemented in Python within the `functions` module. It has been tested with the same inputs as the exponential algorithm, yielding identical results. Additionally, running times were calculated for both algorithms across sequences of varying lengths, demonstrating the efficiency of the polynomial solution for larger inputs.
 
 **f) Efficient Algorithm from ChatGPT**
+
 An efficient algorithm was requested from ChatGPT. Its correctness and complexity were analyzed, confirming its validity. This algorithm was implemented in Python within the `functions` module and tested with all prior inputs, showing consistent results. Further tests were conducted on additional, larger sequences to validate its performance and correctness.
